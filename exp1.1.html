@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Counter</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #f4f4f9; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 400px; }
+        textarea { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        .info { display: flex; justify-content: space-between; margin-top: 10px; font-weight: bold; }
+        .danger { color: red; border-color: red; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Live Character Counter</h2>
+        <textarea id="myText" rows="5" placeholder="Type here..."></textarea>
+        <div class="info">
+            <span id="charCount">0 / 200</span>
+            <span id="msg">200 left</span>
+        </div>
+    </div>
+
+    <script>
+
+        const textArea = document.getElementById('myText');
+        const countDisplay = document.getElementById('charCount');
+        const msgDisplay = document.getElementById('msg');
+        const MAX = 200;
+
+        textArea.addEventListener('input', () => {
+            const length = textArea.value.length;
+            countDisplay.innerText = `${length} / ${MAX}`;
+            
+            if (length > MAX) {
+                textArea.classList.add('danger');
+                msgDisplay.innerText = "Over Limit!";
+                msgDisplay.style.color = "red";
+            } else {
+                textArea.classList.remove('danger');
+                msgDisplay.innerText = `${MAX - length} left`;
+                msgDisplay.style.color = "black";
+            }
+        });
+    </script>
+</body>
+</html>
